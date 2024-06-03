@@ -9,22 +9,16 @@ from selenium.webdriver.common.by import By
 driver = webdriver.Chrome()
 
 
-
-
-
-
 try:
-        # через get мы говорим браузеру что обращаемся к странице
-    driver.get('https://erikdark.github.io/Qa_autotest_01/')
-    time.sleep(2)
-    #с помощью команды find_element(и класса By внутри ) мы ишем нужный элемент на странце сайта, в качестве аргумента мы передаем класс поиска By и значение которое ищем.
-    btns = driver.find_elements(By.CSS_SELECTOR, '.btn')
-    
-    print(len(btns))
-    if len(btns) == 8:
-        print('da')
-    else:
-        print('no')
+    driver.get('https://erikdark.github.io/Qa_autotest_02/')
+    data = ['7821378127','erik@mail.ru','erik','test123']
+    inputs = driver.find_elements(By.CSS_SELECTOR,'input')
+    for i in range(len(inputs)):
+        inputs[i].send_keys(data[i])
+    btn = driver.find_element(By.CSS_SELECTOR, '#submitBtn')
+    time.sleep(1)
+    btn.click()
+    time.sleep(3)
 
 finally:
-    driver.close()
+    driver.quit()
